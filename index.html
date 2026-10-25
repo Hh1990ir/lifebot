@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101827" />
+  <meta name="description" content="LifeBot؛ دستیار دقیق محاسبات ریاضی" />
+  <title>LifeBot | دستیار دقیق محاسبات ریاضی</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <section id="welcome-screen" class="welcome-screen">
+    <div class="welcome-orbit orbit-one"></div><div class="welcome-orbit orbit-two"></div>
+    <div class="welcome-card">
+      <div class="welcome-brand"><span class="welcome-logo">✳</span><span>LifeBot <small>محاسبه کن؛ رشد کن</small></span></div>
+      <div class="plant-scene" aria-hidden="true"><div class="sun-glow"></div><div class="plant-stem"></div><div class="leaf leaf-left"></div><div class="leaf leaf-right"></div><div class="flower"><i></i><i></i><i></i><i></i><i></i><b></b></div><div class="soil"><span></span><span></span><span></span></div><div class="pot"></div></div>
+      <span class="welcome-kicker">یک شروع تازه</span><h1>به فضای رشد <em>LifeBot</em> خوش آمدی</h1>
+      <p>از یک بذر کوچک شروع کن؛ محاسبات، اطلاعات و مسیر کارت را در یک فضای منظم مدیریت کن.</p>
+      <button id="plant-enter" class="plant-button"><span>🌱</span> کاشتن بذر و ورود <b>←</b></button>
+      <small class="welcome-note">فضای کاری هوشمند برای محاسبه و مدیریت مجموعه</small>
+    </div>
+  </section>
+  <section id="role-screen" class="role-screen hidden"><div class="role-heading"><span class="welcome-logo">✳</span><p>LifeBot / فضای کاری</p><h1>چطور می‌خواهی وارد شوی؟</h1><span>نقش خودت را انتخاب کن تا ابزارهای مرتبط نمایش داده شوند.</span></div><div class="role-cards"><button class="role-card owner-role" data-role="owner"><span class="role-icon">♙</span><strong>مالک مجموعه</strong><small>محاسبات، آرشیو شماره کارت‌ها و مدیریت ثبت‌ها</small><b>ورود به پنل مالک ←</b></button><button class="role-card member-role" data-role="member"><span class="role-icon">✦</span><strong>زیرمجموعه</strong><small>ثبت شماره کارت و اطلاعات کانال‌های مرتبط</small><b>ورود / ثبت‌نام زیرمجموعه ←</b></button></div><button id="back-to-welcome" class="back-link">بازگشت به صفحه آغاز</button></section>
+  <section id="login-screen" class="login-screen hidden" aria-live="polite">
+    <div class="login-glow login-glow-one"></div><div class="login-glow login-glow-two"></div>
+    <form id="login-form" class="login-card">
+      <button type="button" id="login-back" class="login-back">→ بازگشت</button>
+      <div class="login-brand-mark">✳</div><span class="login-eyebrow">LIFEBOT · فضای امن</span>
+      <h1 id="login-title">ورود به فضای کاری</h1><p id="login-description">برای ادامه، اطلاعات حساب خود را وارد کنید.</p>
+      <div id="setup-notice" class="setup-notice hidden">به نظر می‌رسد این اولین اجراست. ابتدا حساب مالک را ایجاد کنید.</div>
+      <label id="display-name-wrap" class="hidden">نام و نام خانوادگی<input id="register-display-name" autocomplete="name" maxlength="100" placeholder="نام کامل شما" /></label>
+      <label>نام کاربری<input id="login-username" autocomplete="username" required minlength="3" maxlength="40" placeholder="نام کاربری" /></label>
+      <label>رمز عبور<input id="login-password" type="password" autocomplete="current-password" required minlength="8" maxlength="128" placeholder="حداقل ۸ نویسه" /></label>
+      <label id="confirm-password-wrap" class="hidden">تکرار رمز عبور<input id="login-password-confirm" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="رمز عبور را دوباره وارد کنید" /></label>
+      <button id="login-submit" class="plant-button" type="submit">ورود امن <b>←</b></button>
+      <button id="register-toggle" class="back-link" type="button">زیرمجموعه تازه هستید؟ ثبت‌نام</button>
+      <div id="login-message" class="form-message hidden" role="alert"></div>
+      <small class="login-footnote">رمز عبور به‌صورت هش‌شده ذخیره می‌شود؛ نه به شکل متن ساده.</small>
+    </form>
+  </section>
+  <div id="main-app" class="app-shell hidden">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="LifeBot صفحه اصلی">
+        <span class="brand-mark">∑</span>
+        <span><strong>LifeBot</strong><small>دستیار دقیق محاسبات ریاضی</small></span>
+      </a>
+      <div class="side-label">فضای کاری</div>
+      <button class="nav-item active" data-view="home" data-owner-only><span>⌂</span> نمای کلی</button>
+      <button class="nav-item" data-view="addition" data-owner-only><span>＋</span> جمع اعداد</button>
+      <button class="nav-item" data-view="multiplication" data-owner-only><span>×</span> ضرب در ضریب</button>
+      <button class="nav-item" data-view="cards" data-owner-only><span>▤</span> مدیریت شماره کارت‌ها</button>
+      <button class="nav-item" data-view="member" data-member-only><span>＋</span> ثبت اطلاعات</button>
+      <button class="nav-item" id="switch-role"><span>⇄</span> تغییر نقش</button>
+      <div class="sidebar-bottom">
+        <span class="privacy-dot"></span>
+        <span>محاسبات فقط روی همین دستگاه انجام می‌شود.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">محاسبات دقیق، با بررسی مستقل</div><h1 id="page-title">نمای کلی</h1></div>
+        <div class="top-actions">
+          <span class="local-badge"><span class="privacy-dot"></span> محلی و خصوصی</span>
+          <button class="secondary-button logout-button" id="logout-button" type="button">خروج امن</button><button class="icon-button" id="theme-toggle" aria-label="تغییر پوسته" title="تغییر پوسته">☾</button>
+        </div>
+      </header>
+
+      <section id="home-view" class="view" data-owner-only>
+        <div class="dashboard-date"><span>امروز</span><strong id="persian-date">—</strong><span class="date-dot">●</span></div><section class="calendar-widget" aria-label="تقویم شمسی"><div class="calendar-head"><div><span>تقویم شمسی</span><strong id="calendar-month">—</strong></div><span class="calendar-mark">▦</span></div><div id="calendar-grid" class="calendar-grid"></div></section><div class="role-banner"><span>✦</span><div><strong id="role-banner-title">پنل مالک مجموعه</strong><small id="role-banner-copy">نمای کلی ابزارها و مدیریت ثبت‌های مجموعه</small></div><span class="role-chip" id="role-chip">مالک</span></div>
+        <div class="hero">
+          <div class="hero-copy"><span class="hero-tag">دقت در هر رقم</span><h2>محاسباتت را با اطمینان انجام بده.</h2>
+            <p>اعداد را وارد کن، محاسبه بگیر و نتیجه را با مسیر بررسی مستقل کنترل کن. بدون حساب کاربری و بدون ارسال داده.</p>
+          </div>
+          <div class="hero-symbol" aria-hidden="true"><span>∑</span><i>×</i><b>✓</b></div>
+        </div>
+        <div class="section-heading"><div><h2>ابزارهای محاسباتی</h2><p>یک ابزار را برای شروع انتخاب کن.</p></div><span class="count-pill">۲ ابزار فعال</span></div>
+        <div class="tool-grid">
+          <article class="tool-card">
+            <div class="tool-icon sum-icon">∑</div><span class="tool-kicker">ابزار ۰۱</span><h3>جمع اعداد</h3>
+            <p>جمع دقیق فهرست‌های بلند، اعداد منفی و اعشاری؛ با گزارش و بررسی مستقل.</p>
+            <div class="tool-meta"><span>● دقت اعشاری</span><span>● گزارش کامل</span></div>
+            <button class="primary-button full" data-open="addition">باز کردن ماشین‌حساب <span>←</span></button>
+          </article>
+          <article class="tool-card">
+            <div class="tool-icon multiply-icon">×</div><span class="tool-kicker">ابزار ۰۲</span><h3>ضرب در ضریب</h3>
+            <p>هر عدد را جداگانه در یک ضریب ثابت ضرب کن؛ با شماره‌گذاری، جمع نتایج و کنترل سازگاری.</p>
+            <div class="tool-meta"><span>● حفظ ترتیب</span><span>● جمع نتایج</span></div>
+            <button class="primary-button full" data-open="multiplication">باز کردن ماشین‌حساب <span>←</span></button>
+          </article>
+        </div>
+        <section class="history-panel">
+          <div class="section-heading compact"><div><h2>آخرین محاسبات</h2><p>سوابق روی همین مرورگر ذخیره می‌شوند.</p></div><button class="text-button" id="clear-history">پاک کردن سوابق</button></div>
+          <div id="history-list" class="history-list"><div class="empty-state">هنوز محاسبه‌ای ثبت نشده است.</div></div>
+        </section>
+      </section>
+
+      <section id="addition-view" class="view hidden">
+        <div class="workspace-intro"><div class="tool-icon sum-icon">∑</div><div><h2>جمع اعداد</h2><p>هر عدد را در یک خط بنویس. خط‌های خالی نادیده گرفته می‌شوند.</p></div></div>
+        <div class="workspace-grid">
+          <section class="panel input-panel">
+            <div class="panel-heading"><div><span class="step-label">مرحله ۱</span><h3>فهرست اعداد</h3></div><span class="subtle">یک عدد در هر خط</span></div>
+            <textarea id="sum-input" spellcheck="false" autocomplete="off" placeholder="مثلاً:&#10;300&#10;3000&#10;529&#10;150&#10;75"></textarea>
+            <div class="input-footer"><span id="sum-line-count">۰ خط</span><button class="text-button" data-sample="sum">نمونه‌گذاری</button></div>
+            <div id="sum-errors" class="error-box hidden" role="alert"></div>
+            <div class="button-row"><button class="primary-button" id="calculate-sum">محاسبه و بررسی <span>↗</span></button><button class="secondary-button" id="reset-sum">پاک کردن</button></div>
+          </section>
+          <section class="panel result-panel">
+            <div class="panel-heading"><div><span class="step-label">مرحله ۲</span><h3>نتیجه محاسبه</h3></div><span class="result-badge">جمع</span></div>
+            <div id="sum-result" class="result-placeholder"><span class="placeholder-icon">∑</span><strong>نتیجه اینجا نمایش داده می‌شود</strong><p>اعداد را وارد و روی «محاسبه و بررسی» بزن.</p></div>
+            <div id="sum-output" class="hidden"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="cards-view" class="view hidden">
+        <div class="workspace-intro"><div class="tool-icon sum-icon">▤</div><div><h2>مدیریت شماره کارت‌ها</h2><p>جست‌وجو و بررسی اطلاعات ثبت‌شده‌ی افراد و کانال‌هایشان.</p></div></div>
+        <section class="panel user-management-panel"><div class="section-heading compact"><div><h2>حساب‌های زیرمجموعه</h2><p>برای هر فرد یک حساب جداگانه بسازید.</p></div><span class="count-pill">مدیریت دسترسی</span></div><form id="create-member-form" class="create-member-form"><label>نام نمایشی<input id="new-member-name" required maxlength="100" placeholder="نام و نام خانوادگی" /></label><label>نام کاربری<input id="new-member-username" required minlength="3" maxlength="40" placeholder="نام کاربری یکتا" /></label><label>رمز عبور موقت<input id="new-member-password" required type="password" minlength="8" maxlength="128" placeholder="حداقل ۸ نویسه" /></label><button class="primary-button" type="submit">ساخت حساب زیرمجموعه</button></form><div id="member-accounts-list" class="member-accounts-list"></div><div id="account-message" class="form-message hidden" role="status"></div></section><section class="panel archive-panel"><div class="archive-toolbar"><input id="card-search" class="archive-search" placeholder="جست‌وجو بر اساس نام، شماره کارت یا تگ…"/><button id="refresh-cards" class="secondary-button">به‌روزرسانی</button></div><div id="card-archive-list" class="card-archive-list"><div class="empty-state">در حال دریافت آرشیو…</div></div></section>
+      </section>
+      <section id="member-view" class="view hidden">
+        <div class="workspace-intro"><div class="tool-icon multiply-icon">✦</div><div><h2>ثبت شماره کارت و کانال‌ها</h2><p>اطلاعات را با دقت وارد کن؛ ثبت‌ها در پایگاه داده‌ی محلی برنامه نگهداری می‌شوند.</p></div></div>
+        <form id="member-form" class="panel member-form"><div class="form-grid"><label>نام صاحب کارت<input required id="card-owner" maxlength="100" placeholder="نام و نام خانوادگی"/></label><label>شماره کارت<input required id="card-number" inputmode="numeric" maxlength="32" placeholder="شماره کارت"/></label></div><div class="channels-heading"><div><h3>کانال‌های زیرمجموعه</h3><p>برای هر کانال، تگ و نام فارسی را وارد کن.</p></div><span id="channel-count" class="count-pill">۱ کانال</span></div><div id="channel-fields"><div class="channel-row"><label>تگ کانال<input required name="channelTag" placeholder="مثلاً @channel" maxlength="100"/></label><label>نام فارسی کانال<input required name="channelName" placeholder="نام کانال" maxlength="100"/></label><button type="button" class="remove-channel" aria-label="حذف کانال" disabled>−</button></div></div><div class="form-actions"><button type="button" id="add-channel" class="secondary-button">＋ افزودن کانال</button><button type="submit" class="primary-button">ثبت اطلاعات <span>↗</span></button></div><div id="member-message" class="form-message hidden" role="status"></div></form>
+      </section>
+      <section id="multiplication-view" class="view hidden">
+        <div class="workspace-intro"><div class="tool-icon multiply-icon">×</div><div><h2>ضرب اعداد در یک ضریب</h2><p>هر ورودی به‌صورت جداگانه در ضریب یکسان ضرب می‌شود.</p></div></div>
+        <div class="workspace-grid">
+          <section class="panel input-panel">
+            <div class="panel-heading"><div><span class="step-label">مرحله ۱</span><h3>ورودی‌ها</h3></div></div>
+            <label class="field-label" for="multiply-input">فهرست اعداد <span>یک عدد در هر خط</span></label>
+            <textarea id="multiply-input" spellcheck="false" autocomplete="off" placeholder="3500&#10;2100&#10;1100&#10;680&#10;1500"></textarea>
+            <div class="input-footer"><span id="multiply-line-count">۰ خط</span><button class="text-button" data-sample="multiply">نمونه‌گذاری</button></div>
+            <label class="field-label multiplier-label" for="multiplier-input">ضریب موردنظر</label>
+            <input id="multiplier-input" class="multiplier-input" inputmode="decimal" autocomplete="off" value="0.035" placeholder="مثلاً 0.035" />
+            <div id="multiply-errors" class="error-box hidden" role="alert"></div>
+            <div class="button-row"><button class="primary-button" id="calculate-multiply">محاسبه و بررسی <span>↗</span></button><button class="secondary-button" id="reset-multiply">پاک کردن</button></div>
+          </section>
+          <section class="panel result-panel">
+            <div class="panel-heading"><div><span class="step-label">مرحله ۲</span><h3>نتایج ضرب</h3></div><span class="result-badge purple">ضرب</span></div>
+            <div id="multiply-result" class="result-placeholder"><span class="placeholder-icon">×</span><strong>نتایج اینجا نمایش داده می‌شوند</strong><p>فهرست اعداد و ضریب را وارد کن.</p></div>
+            <div id="multiply-output" class="hidden"></div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="app-footer"><span>LifeBot <b>·</b> نسخه ۲.۰</span><span>محاسبات قطعی با اعداد اعشاری دقیق</span></footer>
+    </main>
+  </div>
+  </div>
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
